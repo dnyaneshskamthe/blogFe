@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreateBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
+  const navigate = useNavigate()
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -34,7 +36,7 @@ const CreateBlog = () => {
       });
     
       if (response.ok) {
-        console.log('Blog post created successfully');
+        navigate('/landingPage/myBlogs')
       } else {
         console.error('Failed to create blog post');
       }

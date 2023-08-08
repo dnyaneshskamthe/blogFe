@@ -13,7 +13,6 @@ const MyBlogs = () => {
         if (response.ok) {
           const data = await response.json();
           setBlogs(data.blogs);
-          console.log(data.blogs);
         } else {
           console.error('Failed to fetch blogs');
         }
