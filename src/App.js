@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/logins/Login';
 import LandingPage from './components/blogsAcions/LandingPage';
+import EditBlog from './components/blogsAcions/EditBlog';
 import NoPage from './components/blogsAcions/NoPage';
 
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/landingPage/*" element={<LandingPage />}/>
+          {/* <Route path="/edit/:id" element={<EditBlog/>} /> */}
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
