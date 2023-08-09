@@ -5,19 +5,19 @@ import Header from '../Basic/Header'
 import Profile from './Profile'
 import MyBlogs from './MyBlogs'
 import CreateBlog from './CreateBlog'
-import Settings from './Settings'
 import EditBlog from './EditBlog';
+import LogOut from '../logins/Logout';
 
 const LandingPage = () => {
   return (
     <div>
         <Header />
         <Routes>
+            <Route index element = {<MyBlogs/>}/>
             <Route path="profile" element={<Profile />} />
             <Route path="myBlogs" element={<MyBlogs />} />
             <Route path="createBlog" element={<CreateBlog />} />
-            {/* <Route path="edit/:id" element={<EditBlog/>} /> */}
-            <Route path="settings" element={<Settings />} />
+            <Route path="logout" element={<LogOut />} />
             {/* Add the edit route within the nested Routes */}
             <Route path="edit/:id" element={<EditBlog />} />
         </Routes>

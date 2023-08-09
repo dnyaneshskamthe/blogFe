@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from "../context/AuthContext";
+
 const HomePage = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
   const navigate = useNavigate()
+  const auth = useAuth()
   
   const displaySignup = () => {
     setShowSignIn(false);
@@ -13,9 +16,57 @@ const HomePage = () => {
     setShowSignIn(true);
     setShowSignUp(false);
   };
-  const handleSignIn = () => {
-    navigate('./landingPage')
+  const handleSignIn = async () => {
+    const username = document.getElementById('signin-username').value;
+    const password = document.getElementById('signin-password').value;
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signIn`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        const data = await response.json(); // Call login function with the token
+        // Store the token in the local storage
+        // localStorage.setItem("token", data.token);
+        auth.login(data.token)
+        // Sign in successful, navigate to landing page
+        navigate('/landingPage');
+      } else {
+        // Handle sign in error
+        alert('Sign in failed');
+      }
+    } catch (error) {
+        alert('Error signing in:', error);
+      }
   }
+  const handleSignUp = async () => {
+    const username = document.getElementById('signup-username').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signUp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      });
+
+      if (response.ok) {
+        // Sign up successful, switch to sign in view
+        displaySignIn();
+      } else {
+        // Handle sign up error
+        alert('Sign up failed');
+      }
+    } catch (error) {
+      alert('Error signing up:', error);
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -84,7 +135,7 @@ const HomePage = () => {
                       placeholder="********"
                     />
                   </div>
-                  <button className="btn btn-primary w-100">Sign Up</button>
+                  <button className="btn btn-primary w-100" onClick={handleSignUp}>Sign Up</button>
                   <div className="mt-4 text-center">
                     <span className="text-center">
                       Already registered?{" "}

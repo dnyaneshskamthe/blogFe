@@ -7,6 +7,7 @@ const EditBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     // Fetch the blog data based on the ID
@@ -36,6 +37,7 @@ const EditBlog = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ title, content }),
       });

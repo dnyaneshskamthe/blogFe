@@ -5,10 +5,12 @@ import Login from './components/logins/Login';
 import LandingPage from './components/blogsAcions/LandingPage';
 import EditBlog from './components/blogsAcions/EditBlog';
 import NoPage from './components/blogsAcions/NoPage';
+import { AuthProvider } from './components/context/AuthContext';
 
 
 function App() {
   return (
+    <AuthProvider>
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -20,6 +22,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </AuthProvider>
   );
 }
 

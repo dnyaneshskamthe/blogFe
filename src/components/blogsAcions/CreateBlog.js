@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const CreateBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const navigate = useNavigate()
+  const auth = useAuth();
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    // write logout logic
+    return;
+  }
+
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -32,6 +41,9 @@ const CreateBlog = () => {
      try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/posts`, {
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body : formData,
       });
     
@@ -47,6 +59,8 @@ const CreateBlog = () => {
   };
 
   return (
+    <>
+    { auth.isAuthenticated() ? ( 
     <div className="container mt-4">
       <div className="card">
         <div className="card-body">
@@ -85,7 +99,10 @@ const CreateBlog = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div> ) :  (
+        <p>Please log in to view your profile.</p>
+      )
+    }</>
   );
 };
 
