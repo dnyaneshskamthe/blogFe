@@ -32,7 +32,7 @@ const HomePage = () => {
         const data = await response.json(); // Call login function with the token
         // Store the token in the local storage
         // localStorage.setItem("token", data.token);
-        auth.login(data.token)
+        auth.login(data.token, username)
         // Sign in successful, navigate to landing page
         navigate('/landingPage');
       } else {

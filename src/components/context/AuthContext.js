@@ -14,17 +14,19 @@ const getUserFromLocalStorage = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(getUserFromLocalStorage()); // Call the function here
 
-  const login = (token) => {
+  const login = (token, username) => {
     // Save the token in local storage or a cookie
     localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
 
     // Set the user state with the token
-    setUser({ token });
+    setUser({ token, username });
   };
 
   const logout = () => {
     // Remove the token from local storage or a cookie
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     // Clear the user state
     setUser(null);
   };

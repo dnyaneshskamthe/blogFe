@@ -25,11 +25,15 @@ const Header = () => {
     <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/">My Blog App</Link>
+        <Link className="navbar-brand fst-italic fw-bold fs-1" to="/">The Blogger</Link>
+        {auth.isAuthenticated() && (
+            <span className="navbar-text mx-4">
+              Welcome, {auth.user.username} {/* Replace 'name' with the correct property */}
+            </span>
+        )}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
