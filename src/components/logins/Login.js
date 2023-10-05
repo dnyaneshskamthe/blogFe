@@ -68,6 +68,10 @@ const HomePage = () => {
     }
   };
 
+  const handleForgotPw = ()=>{
+    navigate('/forgot')
+  }
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
@@ -95,6 +99,17 @@ const HomePage = () => {
                   </div>
                   <div className="text-center">
                   <button className="btn btn-primary w-100" onClick={handleSignIn}>Sign In</button>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <span className="forgotPw">
+                      Forgot password?{" "}
+                      <span
+                        className="text-primary"
+                        onClick={handleForgotPw}
+                      >
+                        Reset password
+                      </span>{" "}
+                    </span>
                   </div>
                   <div className="mt-4 text-center">
                     <span className="">
